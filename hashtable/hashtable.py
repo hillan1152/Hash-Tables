@@ -2,7 +2,6 @@ class HashTableEntry:
     """
     Hash Table entry, as a linked list node.
     """
-
     def __init__(self, key, value):
         self.key = key
         self.value = value
@@ -16,7 +15,9 @@ class HashTable:
 
     Implement this.
     """
-
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.storage = [None] * self.capacity
     def fnv1(self, key):
         """
         FNV-1 64-bit hash function
@@ -76,6 +77,7 @@ class HashTable:
 
 if __name__ == "__main__":
     ht = HashTable(2)
+    print(ht.storage)
 
     ht.put("line_1", "Tiny hash table")
     ht.put("line_2", "Filled beyond capacity")
