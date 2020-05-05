@@ -25,15 +25,15 @@ class HashTable:
 
         Implement this, and/or DJB2.
         """
-        hash = 14695981039346656037
-        FNV_prime = 1099511628211
-        for i in hash:
-            hash = hash * FNV_prime
-            # hash = hash 
-            pass
-        return hash 
+        fnv_offset = str(key).encode()
+        total = 0
+        print(fnv_offset)
+        for i in fnv_offset:
+            total += i
+            total &= 0xffffffffffffffff
+
+        return total 
         # Implement to last line of the loop
-        total &= 0*ffffffffffffffff
 
     def djb2(self, key):
         """
@@ -47,7 +47,6 @@ class HashTable:
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        h = self.fnv1(key)
         return self.fnv1(key) % self.capacity
         # return self.djb2(key) % self.capacity
 
@@ -59,7 +58,8 @@ class HashTable:
 
         Implement this.
         """
-
+        index = self.hash_index(key)
+        self.storage[index] = value
     def delete(self, key):
         """
         Remove the value stored with the given key.
@@ -68,6 +68,8 @@ class HashTable:
 
         Implement this.
         """
+        index = self.hash_index(key)
+        self.storage[index] = None
 
     def get(self, key):
         """
@@ -77,7 +79,9 @@ class HashTable:
 
         Implement this.
         """
-
+        index = self.hash_index(key)
+	    
+        return self.storage[index]
     def resize(self):
         """
         Doubles the capacity of the hash table and
@@ -106,7 +110,7 @@ if __name__ == "__main__":
     ht.resize()
     new_capacity = len(ht.storage)
 
-    print(f"\nResized from {old_capacity} to {new_capacity}.\n")
+    # print(f"\nResized from {old_capacity} to {new_capacity}.\n")
 
     # Test if data intact after resizing
     print(ht.get("line_1"))
