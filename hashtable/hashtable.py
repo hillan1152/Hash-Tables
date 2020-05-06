@@ -33,7 +33,6 @@ class HashTable:
         for i in fnv_offset:
             total += i
             total &= 0xffffffffffffffff
-            print("what is the offset?", total)
 
         return total 
         # Implement to last line of the loop
@@ -144,9 +143,10 @@ class HashTable:
         if curr_node is not None:
             while curr_node:
                 if curr_node.key == key:
-                    return self.storage[index].value
+                    # print("STORAGE VALUE -->", curr_node.value)
+                    return curr_node.value
                 curr_node = curr_node.next
-                
+                # print("GET CURR NODE -->", curr_node)
             return None
         else:
             return None
@@ -167,8 +167,8 @@ if __name__ == "__main__":
     ht.put("line_1", "Tiny hash table")
     ht.put("line_2", "Filled beyond capacity")
     
-    print(ht.get("line_1").value)
-    print(ht.get("line_2").value)
+    print(ht.get("line_1"))
+    print(ht.get("line_2"))
     
     ht.put("line_3", "Linked list saves the day!")
     ht.put("line_4", "replacement value")
@@ -177,12 +177,12 @@ if __name__ == "__main__":
     print("")
 
     # Test storing beyond capacity
-    print(ht.get("line_1").value)
-    print("Next value before deletion --> ", ht.get("line_1").next.value)
-    print(ht.get("line_2").value)
+    print(ht.get("line_1"))
+    print("Next value before deletion --> ", ht.get("line_1"))
+    # print(ht.get("line_2"))
     # print(ht.get("line_3"))
-    print(ht.delete("line_44"))
-    print("line after deletion --> ", ht.get("line_4"))
+    # print(ht.delete("line_44"))
+    # print("line after deletion --> ", ht.get("line_4"))
 
 
     # # Test resizing
